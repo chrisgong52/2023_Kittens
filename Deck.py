@@ -22,13 +22,27 @@ class Deck:
             print(item)
 
         self.func_table = {
-            "shuffle": self.shuffle
+            "shuffle": self.shuffle,
+            "draw": self.draw,
         }
 
+    '''
+        draw returns the top card from the deck and removes the top card
+        the top card is index 0
+
+        return the top card if deck not empty, else false
+    '''
     def draw(self):
-        out = self.deck[0]
-        self.deck.pop(0)
-        return out
+        if len(self.deck) > 0:
+            out = self.deck[0]
+            self.deck.pop(0)
+            return out
+        else:
+            return False
     
+    '''
+        shuffle shuffles the deck
+    '''
     def shuffle(self):
         random.shuffle(self.deck)
+        return True
