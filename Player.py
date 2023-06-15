@@ -5,6 +5,18 @@ class Player:
         self.specials = set(["see_the_future", "nope", "attack", "shuffle", "favor", "skip", "diffuse", "exploding_kitten"])
 
     '''
+        repr for printing the player if print(player) called 
+    '''
+    def __repr__(self):
+        return str(self.hand)
+    
+    '''
+        print will print the player's hand
+    '''
+    def print(self):
+        print(self.hand)
+
+    '''
         params: deck is the deck to draw from
         draw draws a card from the top of the deck and adds it
         to the player's hand
@@ -62,7 +74,7 @@ class Player:
         
         return list of cards if played, else false
     '''
-    def play(self, indices: int):
+    def play(self, indices: list):
         if not self.valid_check(indices):
             return False
         played = []
@@ -71,3 +83,34 @@ class Player:
             played.append(self.hand[item])
             self.hand.pop(item)
         return played
+    
+    '''
+        see_the_future_play puts the last three cards onto the deck in
+        the same order as they were seen
+    '''
+    def see_the_future_return(self, deck):
+        for _ in range(3):
+            deck.push(self.hand[-1])
+            self.hand.pop(-1)
+    
+    '''
+        params:
+            index: card to remove
+        remove_card will remove a card from a player's hand
+        without checks
+    '''
+    def remove_card(self, index: int):
+        if index < len(self.hand):
+            temp = self.hand[index]
+            self.hand.pop(index)
+            return temp
+        else:
+            return False
+        
+    '''
+        params:
+            card: string of the name of the card to add to player's hand
+        add will add a card to the player's hand
+    '''
+    def add(self, card: str):
+        self.hand.append(card)

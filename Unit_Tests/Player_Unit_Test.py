@@ -1,7 +1,9 @@
-from Player import Player
+import sys
+sys.path.insert(0, '/Users/chrisgong/Desktop/Personal_Projects/2023_Kittens')
 
-# global player
-# player = Player("chris", ["tacocat", "attack", "tacocat", "tacocat"])
+from Player import Player
+from Deck import Deck
+
 
 # play special card
 def test1():
@@ -39,7 +41,14 @@ def test6():
     temp = p1.play([0,1,2,3,4])
     return temp == False
 
-func_list = [test1(), test2(), test3(), test4(), test5(), test6()]
+# player draws card
+def test7():
+    p1 = Player("chris", ["tacocat", "attack", "skip", "skip", "nope"])
+    deck = Deck(1, False)
+    p1.draw(deck)
+    return p1.hand == ["tacocat", "attack", "skip", "skip", "nope", "diffuse"]
+
+func_list = [test1(), test2(), test3(), test4(), test5(), test6(), test7()]
 
 
 def main():
