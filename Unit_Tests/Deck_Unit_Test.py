@@ -21,7 +21,37 @@ def test2():
         deck.push(item)
     return deck.peek() == "attack" and len(deck) == 1
 
-func_list = [test1(), test2()]
+# shuffle
+def test3():
+    deck = Deck(1, False)
+    temp = []
+    for item in deck.deck:
+        temp.append(item)
+    deck.shuffle()
+    temp2 = deck.deck
+    return temp != temp2
+
+# insert diffuse
+def test4():
+    deck = Deck(2, False)
+    deck.insert_diffuse()
+    count = 0
+    for item in deck.deck:
+        if item == "diffuse":
+            count = count + 1
+    return count == 4
+
+# insert kittens
+def test5():
+    deck = Deck(2, False)
+    deck.insert_kittens()
+    count = 0
+    for item in deck.deck:
+        if item == "exploding_kitten":
+            count = count + 1
+    return count == 1
+
+func_list = [test1(), test2(), test3(), test4(), test5()]
 
 def main():
     count = 1

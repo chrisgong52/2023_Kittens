@@ -44,11 +44,26 @@ def test6():
 # player draws card
 def test7():
     p1 = Player("chris", ["tacocat", "attack", "skip", "skip", "nope"])
-    deck = Deck(1, False)
+    deck = Deck(1, False, False)
     p1.draw(deck)
     return p1.hand == ["tacocat", "attack", "skip", "skip", "nope", "diffuse"]
 
-func_list = [test1(), test2(), test3(), test4(), test5(), test6(), test7()]
+# player draws exploding kitten no diffuse
+def test8():
+    p1 = Player("chris", ["tacocat", "attack", "skip", "skip", "nope"])
+    deck = Deck(1, False, False)
+    deck.deck.insert(0, "exploding_kitten")
+    return p1.draw(deck) == -1
+
+# player draws exploding kitten diffuse in hand
+def test9():
+    p1 = Player("chris", ["diffuse", "attack", "skip", "skip", "nope"])
+    deck = Deck(1, False, False)
+    deck.deck.insert(0, "exploding_kitten")
+    return p1.draw(deck) == 1 and p1.hand == ["attack", "skip", "skip", "nope"]
+    
+
+func_list = [test1(), test2(), test3(), test4(), test5(), test6(), test7(), test8(), test9()]
 
 
 def main():

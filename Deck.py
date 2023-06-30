@@ -5,10 +5,10 @@ class Deck:
         self.deck = []
         if not discard:
             self.player_count = player_count
-            for item in range(self.player_count):
-                self.deck.append("diffuse")
-                self.deck.append("exploding_kitten")
-            self.deck.pop(-1)
+            # for item in range(self.player_count):
+            #     self.deck.append("diffuse")
+            #     self.deck.append("exploding_kitten")
+            # self.deck.pop(-1)
             general_cards = ["tacocat", "cattermelon", "beard_cat", "hairy_potato_cat", "rainbow_cat", "attack", "shuffle", "favor", "skip"]
             additional_cards = ["see_the_future", "nope"]
             for item in general_cards:
@@ -79,3 +79,22 @@ class Deck:
     '''
     def peek(self):
         return self.deck[0]
+    
+    '''
+        insert diffuses into the deck
+        total of 6 diffuses (iirc) in the game, so add the remainder
+        from the total number minus the players to the deck
+    '''
+    def insert_diffuse(self):
+        num_to_insert = 6 - self.player_count
+        for item in range(num_to_insert):
+            self.deck.append("diffuse")
+        self.shuffle()
+
+    '''
+        insert exploding kittens into the deck (num_players - 1)
+    '''
+    def insert_kittens(self):
+        for item in range(self.player_count-1):
+            self.deck.append("exploding_kitten")
+        self.shuffle()

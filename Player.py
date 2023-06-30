@@ -1,5 +1,12 @@
 class Player:
-    def __init__(self, name: str, hand = []):
+    '''
+        if you use a default parameter, all objects that use that
+        default parameter point to the same object
+        
+        aka need to specify hand each time, otherwise each object's
+        hand points to one unified list amongst all instancesg
+    '''
+    def __init__(self, hand = [], name: str = ""):
         self.name = name
         self.hand = hand
         self.specials = set(["see_the_future", "nope", "attack", "shuffle", "favor", "skip", "diffuse", "exploding_kitten"])
@@ -20,9 +27,21 @@ class Player:
         params: deck is the deck to draw from
         draw draws a card from the top of the deck and adds it
         to the player's hand
+
+        check to see if it's an exploding kitten
+            for GUI, do a display and show that the drawn card is an exploding
+            kitten then go boom and take away the diffuse
     '''
     def draw(self, deck):
-        self.hand.append(deck.draw())
+        card_drawn = deck.draw()
+        if card_drawn == "exploding_kitten":
+            if "diffuse" not in self.hand:
+                return -1
+            else:
+                self.hand.remove("diffuse")
+        else:
+            self.hand.append(card_drawn)
+        return 1
     
     '''
         params: indices is the indices in the hand for cards to play
